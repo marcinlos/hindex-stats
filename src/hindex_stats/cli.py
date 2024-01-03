@@ -5,6 +5,7 @@ import argcomplete
 
 
 COMMANDS = [
+    "show",
 ]
 
 
