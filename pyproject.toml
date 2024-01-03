@@ -7,9 +7,15 @@ authors = ["Marcin Łoś <marcin.los.91@gmail.com>"]
 readme = "README.md"
 homepage = "https://github.com/marcinlos/hindex-stats"
 
+
+[tool.poetry.scripts]
+hindex-stats = "hindex_stats.cli:main"
+
+
 [tool.poetry.dependencies]
 python = "^3.8"
 scholarly = "^1.7.11"
+argcomplete = "^3.2.1"
 
 
 [build-system]
