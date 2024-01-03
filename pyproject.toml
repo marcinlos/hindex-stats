@@ -1,9 +1,11 @@
 [tool.poetry]
 name = "hindex-stats"
 version = "0.1.0"
-description = "Automatic Google scholar data fetching for multiple authors"
+description = "Tool for collecting and processing Google Scholar data"
+license = "MIT"
 authors = ["Marcin Łoś <marcin.los.91@gmail.com>"]
 readme = "README.md"
+homepage = "https://github.com/marcinlos/hindex-stats"
 
 [tool.poetry.dependencies]
 python = "^3.8"
