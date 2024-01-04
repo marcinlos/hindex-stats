@@ -6,11 +6,23 @@ import hindex_stats.fetch as fetch
 
 
 def register_parser(subparsers):
-    p = subparsers.add_parser("show", help="show dupa")
-    p.add_argument("name", type=str, help="author name")
-    p.add_argument("affiliation", type=str, help="author affiliation", nargs="?")
+    p = subparsers.add_parser(
+        "show",
+        help="display information about researchers matching given query",
+        description="""
+        Display information about resears matching the specified name and affiliation,
+        if specified.
+        """,
+    )
+    p.add_argument("name", help="author name")
+    p.add_argument("affiliation", nargs="?", help="author affiliation")
     p.add_argument(
-        "-n", "--max-results", help="maximum number of results", type=int, default=5
+        "-n",
+        "--max-results",
+        type=int,
+        default=5,
+        metavar="MAX",
+        help="maximum number of results (default: %(default)s)",
     )
 
 
