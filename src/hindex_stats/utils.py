@@ -3,6 +3,10 @@ from typing import Iterable, Callable
 
 
 def take(n: int, xs: Iterable) -> Iterable:
+    """
+    Generates n first elements of xs, or fewer if xs generates less than
+    n elements.
+    """
     return itertools.islice(xs, n)
 
 
