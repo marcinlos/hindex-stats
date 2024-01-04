@@ -1,5 +1,4 @@
 import argparse
-import sys
 from importlib import import_module
 
 import argcomplete
@@ -16,7 +15,7 @@ def load_command_module(cmd):
 
 
 def build_cmd_parsers(subparsers, command_modules):
-    for cmd, module in command_modules.items():
+    for module in command_modules:
         module.register_parser(subparsers)
 
 
@@ -29,7 +28,7 @@ def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(title="Actions", dest="action")
 
-    command_modules = {cmd: load_command_module(cmd) for cmd in COMMANDS}
+    command_modules = [load_command_module(cmd) for cmd in COMMANDS]
     build_cmd_parsers(subparsers, command_modules)
 
     # handles a call with no command

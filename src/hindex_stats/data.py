@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 from enum import Flag, auto
-from typing import Optional
 
 
 @dataclass
 class Query:
     name: str
-    affiliation: Optional[str]
+    affiliation: str | None
 
 
 class InfoType(Flag):
@@ -19,7 +18,7 @@ class AuthorEntry:
     name: str
     affiliation: str
     scholar_id: str
-    email: Optional[str]
+    email: str | None
     interests: list[str]
-    hindex: Optional[int]
-    citations: Optional[int]
+    hindex: int | None
+    citations: int | None

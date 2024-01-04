@@ -1,7 +1,7 @@
 import asyncio
 import concurrent.futures
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
-from typing import Callable, Iterable
 
 from scholarly import scholarly
 

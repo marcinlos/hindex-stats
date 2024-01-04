@@ -1,7 +1,7 @@
 import itertools
+from collections.abc import Callable, Iterable
 from functools import reduce
 from operator import or_
-from typing import Callable, Iterable
 
 
 def take(n: int, xs: Iterable) -> Iterable:
