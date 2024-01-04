@@ -27,6 +27,7 @@ def register_parser(subparsers):
         "--info",
         nargs="*",
         choices=("hindex",),
+        default=(),
         metavar="TYPE",
         help="required types of information, one or more of: %(choices)s",
     )
