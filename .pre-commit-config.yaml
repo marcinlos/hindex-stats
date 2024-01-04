@@ -11,15 +11,15 @@ repos:
       - id: check-added-large-files
   - repo: local
     hooks:
-      - id: black
-        name: black
-        entry: black
+      # linter
+      - id: ruff
+        name: ruff
+        entry: ruff check --force-exclude
         language: system
         types: [python]
-  - repo: local
-    hooks:
-      - id: isort
-        name: isort
-        entry: isort
+      # formatter
+      - id: ruff-format
+        name: ruff-format
+        entry: ruff format --force-exclude
         language: system
         types: [python]
