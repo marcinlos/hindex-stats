@@ -1,5 +1,17 @@
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
+from enum import Flag, auto
+
+
+@dataclass
+class Query:
+    name: str
+    affiliation: Optional[str]
+
+
+class InfoType(Flag):
+    NONE = 0
+    HINDEX = auto()
 
 
 @dataclass
@@ -8,6 +20,6 @@ class AuthorEntry:
     affiliation: str
     scholar_id: str
     email: Optional[str]
-    interests: List[str]
+    interests: list[str]
     hindex: Optional[int]
     citations: Optional[int]
