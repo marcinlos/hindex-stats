@@ -1,7 +1,5 @@
-import itertools
-
-from hindex_stats.utils import take, SkipOnce
-from hindex_stats.data import Query
+from hindex_stats.utils import take, SkipOnce, flag_union
+from hindex_stats.data import Query, InfoType
 import hindex_stats.fetch as fetch
 
 
@@ -24,6 +22,14 @@ def register_parser(subparsers):
         metavar="MAX",
         help="maximum number of results (default: %(default)s)",
     )
+
+    p.add_argument(
+        "--info",
+        nargs="*",
+        choices=("hindex",),
+        metavar="TYPE",
+        help="required types of information, one or more of: %(choices)s",
+    )
     p.set_defaults(handler=execute)
 
 
@@ -31,11 +37,18 @@ def _build_query(args) -> Query:
     return Query(args.name, args.affiliation)
 
 
+def _required_info(args) -> InfoType:
+    name_to_flag = {"hindex": InfoType.HINDEX}
+    flags = (name_to_flag[s] for s in args.info)
+    return flag_union(flags, InfoType.NONE)
+
+
 def execute(args):
     query = _build_query(args)
+    info = _required_info(args)
 
     separator = SkipOnce(print)
-    for author in take(args.max_results, fetch.search(query)):
+    for author in take(args.max_results, fetch.search(query, info)):
         separator()
         print(f"{author.name}")
         print(f"  {author.affiliation}")

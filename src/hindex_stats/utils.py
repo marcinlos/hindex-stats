@@ -1,4 +1,6 @@
 import itertools
+from functools import reduce
+from operator import or_
 from typing import Iterable, Callable
 
 
@@ -32,3 +34,10 @@ class SkipOnce:
             self.action()
         else:
             self.first = False
+
+
+def flag_union(flags: Iterable, init):
+    """
+    Computes the union of given flags and the init flag.
+    """
+    return reduce(or_, flags, init)
