@@ -1,7 +1,6 @@
 import itertools
 
 from hindex_stats.utils import take, SkipOnce
-from hindex_stats.author import Author
 import hindex_stats.fetch as fetch
 
 

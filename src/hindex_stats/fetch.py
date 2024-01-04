@@ -6,27 +6,25 @@ from typing import Callable, Iterable
 from scholarly import scholarly
 
 from hindex_stats.utils import take
-from hindex_stats.author import Author
+from hindex_stats.data import AuthorEntry
 
 
-def _make_profile_link(img_link: str) -> str:
-    return img_link.replace("view_op=medium_photo&", "")
-
-
-def _author_from_dict(data: dict) -> Author:
-    return Author(
+def _author_entry_from_dict(data: dict) -> AuthorEntry:
+    return AuthorEntry(
         name=data["name"],
         affiliation=data["affiliation"],
+        scholar_id=data["scholar_id"],
+        email=data["email_domain"] or None,
         interests=data["interests"],
-        hindex=data["hindex"],
-        profile=_make_profile_link(data["url_picture"]),
+        hindex=data.get("hindex", None),
+        citations=data["citedby"],
     )
 
 
 def search(query: str):
     for result in scholarly.search_author(query):
         author = scholarly.fill(result, sections=["indices"])
-        yield _author_from_dict(author)
+        yield _author_entry_from_dict(author)
 
 
 @dataclass
