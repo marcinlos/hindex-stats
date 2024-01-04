@@ -1,6 +1,6 @@
 import itertools
 
-from hindex_stats.utils import take
+from hindex_stats.utils import take, SkipOnce
 from hindex_stats.author import Author
 import hindex_stats.fetch as fetch
 
@@ -14,7 +14,9 @@ def register_parser(subparsers):
 
 
 def execute(args):
+    separator = SkipOnce(print)
     for author in take(args.max_results, fetch.search(args.query)):
+        separator()
         print(f"{author.name}")
         print(f"  {author.affiliation}")
         print(f"  h-index: {author.hindex}")
