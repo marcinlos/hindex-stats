@@ -13,7 +13,7 @@ hindex-stats = "hindex_stats.cli:main"
 
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 scholarly = "^1.7.11"
 argcomplete = "^3.2.1"
 
