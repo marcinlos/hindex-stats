@@ -18,5 +18,10 @@ def execute(args):
         separator()
         print(f"{author.name}")
         print(f"  {author.affiliation}")
-        print(f"  h-index: {author.hindex}")
-        print(f"  {', '.join(author.interests)}")
+        if author.email is not None:
+            print(f"  e-mail: {author.email}")
+        if author.hindex is not None:
+            print(f"  h-index: {author.hindex}")
+        if author.interests:
+            print(f"  interests: {', '.join(author.interests)}")
+        print(f"  citations: {author.citations}")
