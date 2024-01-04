@@ -1,6 +1,6 @@
-from hindex_stats.utils import take, SkipOnce, flag_union
-from hindex_stats.data import Query, InfoType
 import hindex_stats.fetch as fetch
+from hindex_stats.data import InfoType, Query
+from hindex_stats.utils import SkipOnce, flag_union, take
 
 
 def register_parser(subparsers):

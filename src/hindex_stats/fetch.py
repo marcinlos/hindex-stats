@@ -1,12 +1,12 @@
-import concurrent.futures
 import asyncio
+import concurrent.futures
 from dataclasses import dataclass
 from typing import Callable, Iterable
 
 from scholarly import scholarly
 
+from hindex_stats.data import AuthorEntry, InfoType, Query
 from hindex_stats.utils import take
-from hindex_stats.data import AuthorEntry, Query, InfoType
 
 
 def _author_entry_from_dict(data: dict) -> AuthorEntry:

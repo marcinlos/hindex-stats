@@ -1,8 +1,8 @@
-from importlib import import_module
-import sys
 import argparse
-import argcomplete
+import sys
+from importlib import import_module
 
+import argcomplete
 
 COMMANDS = [
     "show",

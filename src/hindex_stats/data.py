@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from typing import Optional
 from enum import Flag, auto
+from typing import Optional
 
 
 @dataclass
