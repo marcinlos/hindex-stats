@@ -32,6 +32,9 @@ def main():
     command_modules = {cmd: load_command_module(cmd) for cmd in COMMANDS}
     build_cmd_parsers(subparsers, command_modules)
 
+    # handles a call with no command
+    parser.set_defaults(handler=lambda _: parser.print_help())
+
     argcomplete.autocomplete(parser)
     args = parser.parse_args()
     run(args)
