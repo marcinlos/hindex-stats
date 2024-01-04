@@ -24,6 +24,7 @@ def register_parser(subparsers):
         metavar="MAX",
         help="maximum number of results (default: %(default)s)",
     )
+    p.set_defaults(handler=execute)
 
 
 def _build_query(args) -> Query:

@@ -20,10 +20,9 @@ def build_cmd_parsers(subparsers, command_modules):
         module.register_parser(subparsers)
 
 
-def run(args, command_modules):
-    command = args.action
-    module = command_modules[command]
-    module.execute(args)
+def run(args):
+    command = args.handler
+    command(args)
 
 
 def main():
@@ -35,7 +34,7 @@ def main():
 
     argcomplete.autocomplete(parser)
     args = parser.parse_args()
-    run(args, command_modules)
+    run(args)
 
 
 if __name__ == "__main__":
