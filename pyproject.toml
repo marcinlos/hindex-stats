@@ -16,6 +16,7 @@ hindex-stats = "hindex_stats.cli:main"
 python = "^3.12"
 scholarly = "^1.7.11"
 argcomplete = "^3.2.1"
+beautifulsoup4 = "^4.12.2"
 
 
 [tool.poetry.group.dev.dependencies]
