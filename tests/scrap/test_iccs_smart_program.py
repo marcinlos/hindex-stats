@@ -68,6 +68,40 @@ def talk_tag():
     return as_tag(text)
 
 
+@pytest.fixture()
+def author_doc():
+    text = """
+    <div class="bio">
+     <div class="bio_title">
+      Siobhan Clarke
+     </div>
+     <table class="bio_table">
+      <tbody>
+       <tr class="evengrey top">
+        <td>
+         Affiliation:
+        </td>
+        <td>
+         Trinity College Dublin
+        </td>
+       </tr>
+       <tr class="oddgrey bottom">
+        <td>
+         Web page:
+        </td>
+        <td>
+         <a href="https://www.cs.tcd.ie/Siobhan.Clarke/" target="_blank">
+          https://www.cs.tcd.ie/Siobhan.Clarke/
+         </a>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    """
+    return as_document(text)
+
+
 def test_parsing_author_occurence(author_occurence_tag):
     result = scrap._parse_author_occurrence(author_occurence_tag)
 
@@ -100,4 +134,10 @@ def test_parsing_talk(talk_tag):
         ],
     )
 
+    assert result == expected
+
+
+def test_parsing_author_page(author_doc):
+    result = scrap._parse_author_page(author_doc)
+    expected = scrap.AuthorDetails("Trinity College Dublin")
     assert result == expected
