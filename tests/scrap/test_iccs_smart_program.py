@@ -141,3 +141,18 @@ def test_parsing_author_page(author_doc):
     result = scrap._parse_author_page(author_doc)
     expected = scrap.AuthorDetails("Trinity College Dublin")
     assert result == expected
+
+
+@pytest.mark.parametrize(
+    ("label", "expected"),
+    [
+        ("Session 6A: MT 5", ("MT", 5)),
+        ("Session 4J: SE4Science 1", ("SE4Science", 1)),
+        ("Session 5: Keynote Lecture 2", ("Keynote Lecture", 2)),
+        ("Session 6C: AIHPC4AS 3", ("AIHPC4AS", 3)),
+        ("Coffee Break", None),
+    ],
+)
+def test_parsing_session_label(label, expected):
+    result = scrap._parse_session_label(label)
+    assert result == expected

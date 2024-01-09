@@ -44,3 +44,13 @@ def _parse_author_page(doc: BeautifulSoup) -> AuthorDetails:
     affiliation = affiliation_tag.text.strip()
 
     return AuthorDetails(affiliation)
+
+
+def _parse_session_label(label: str) -> tuple[str, int] | None:
+    match = re.match(r"Session \w+: (.+) (\d+)", label)
+    if match:
+        name = match.group(1)
+        number = int(match.group(2))
+        return (name, number)
+    else:
+        return None
