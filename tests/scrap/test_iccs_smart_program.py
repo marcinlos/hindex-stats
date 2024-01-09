@@ -17,12 +17,8 @@ def load_tag(name):
     return doc.find()
 
 
-def as_document(text):
-    return BeautifulSoup(text, "html.parser")
-
-
 def as_tag(text):
-    doc = as_document(text)
+    doc = BeautifulSoup(text, "html.parser")
     return doc.find()
 
 
