@@ -21,6 +21,13 @@ class AuthorDetails:
     affiliation: str
 
 
+@dataclass
+class Session:
+    name: str
+    number: int
+    talks: list[Talk]
+
+
 def _parse_author_occurrence(tag: Tag) -> AuthorOccurrence:
     name = tag.text.strip()
     link = tag["href"]
@@ -52,5 +59,18 @@ def _parse_session_label(label: str) -> tuple[str, int] | None:
         name = match.group(1)
         number = int(match.group(2))
         return (name, number)
+    else:
+        return None
+
+
+def _parse_session(tag: Tag) -> Session | None:
+    label_tag = tag.find("span", {"class": "title"})
+    label = label_tag.text.strip()
+    result = _parse_session_label(label)
+    if result:
+        name, number = result
+        talk_tags = tag.find_all("tr", {"class": "talk"})
+        talks = [_parse_talk(t) for t in talk_tags]
+        return Session(name, number, talks)
     else:
         return None
