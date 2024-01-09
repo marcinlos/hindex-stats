@@ -105,36 +105,7 @@ def coffee_break_tag():
 
 @pytest.fixture()
 def author_doc():
-    text = """
-    <div class="bio">
-     <div class="bio_title">
-      Siobhan Clarke
-     </div>
-     <table class="bio_table">
-      <tbody>
-       <tr class="evengrey top">
-        <td>
-         Affiliation:
-        </td>
-        <td>
-         Trinity College Dublin
-        </td>
-       </tr>
-       <tr class="oddgrey bottom">
-        <td>
-         Web page:
-        </td>
-        <td>
-         <a href="https://www.cs.tcd.ie/Siobhan.Clarke/" target="_blank">
-          https://www.cs.tcd.ie/Siobhan.Clarke/
-         </a>
-        </td>
-       </tr>
-      </tbody>
-     </table>
-    </div>
-    """
-    return as_document(text)
+    return load_document("author.html")
 
 
 def test_parsing_author_occurence(author_occurence_tag):
