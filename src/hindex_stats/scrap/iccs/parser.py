@@ -46,7 +46,7 @@ def _parse_talk(tag: Tag) -> Talk:
     return Talk(title, authors)
 
 
-def _parse_author_page(doc: BeautifulSoup) -> AuthorDetails:
+def parse_author_page(doc: BeautifulSoup) -> AuthorDetails:
     label_tag = doc.find("td", string=re.compile("Affiliation"))
     affiliation_tag = label_tag.find_next("td")
 
@@ -78,6 +78,6 @@ def _parse_session(tag: Tag) -> Session | None:
         return None
 
 
-def _parse_program_page(doc: BeautifulSoup) -> list[Session]:
+def parse_program_page(doc: BeautifulSoup) -> list[Session]:
     session_tags = doc.find_all("div", {"class": "session"})
     return list(without_none(map(_parse_session, session_tags)))

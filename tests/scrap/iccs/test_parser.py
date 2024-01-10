@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 from bs4 import BeautifulSoup
 
-import hindex_stats.scrap.iccs_smart_program as scrap
+import hindex_stats.scrap.iccs.parser as parser
 import tests.data as data
 
 
@@ -110,9 +110,9 @@ def program_doc():
 
 
 def test_parsing_author_occurence(author_occurence_tag):
-    result = scrap._parse_author_occurrence(author_occurence_tag)
+    result = parser._parse_author_occurrence(author_occurence_tag)
 
-    expected = scrap.AuthorOccurrence(
+    expected = parser.AuthorOccurrence(
         "Marco Viceconti",
         "https://easychair.org/smart-program/ICCS2021/person2096.html",
     )
@@ -121,20 +121,20 @@ def test_parsing_author_occurence(author_occurence_tag):
 
 
 def test_parsing_talk(talk_tag):
-    result = scrap._parse_talk(talk_tag)
+    result = parser._parse_talk(talk_tag)
 
-    expected = scrap.Talk(
+    expected = parser.Talk(
         title="Smoothing Speed Variability in Age-Friendly Urban Traffic Management",
         authors=[
-            scrap.AuthorOccurrence(
+            parser.AuthorOccurrence(
                 "Jose Monreal Bailey",
                 "https://easychair.org/smart-program/ICCS2021/person1649.html",
             ),
-            scrap.AuthorOccurrence(
+            parser.AuthorOccurrence(
                 "Hadi Tabatabaee Malazi",
                 "https://easychair.org/smart-program/ICCS2021/person1650.html",
             ),
-            scrap.AuthorOccurrence(
+            parser.AuthorOccurrence(
                 "Siobhan Clarke",
                 "https://easychair.org/smart-program/ICCS2021/person1651.html",
             ),
@@ -145,8 +145,8 @@ def test_parsing_talk(talk_tag):
 
 
 def test_parsing_author_page(author_doc):
-    result = scrap._parse_author_page(author_doc)
-    expected = scrap.AuthorDetails("Trinity College Dublin")
+    result = parser.parse_author_page(author_doc)
+    expected = parser.AuthorDetails("Trinity College Dublin")
     assert result == expected
 
 
@@ -161,118 +161,118 @@ def test_parsing_author_page(author_doc):
     ],
 )
 def test_parsing_session_label(label, expected):
-    result = scrap._parse_session_label(label)
+    result = parser._parse_session_label(label)
     assert result == expected
 
 
 def test_parsing_session(session_tag):
-    result = scrap._parse_session(session_tag)
-    expected = scrap.Session(
+    result = parser._parse_session(session_tag)
+    expected = parser.Session(
         name="MT",
         number=1,
         talks=[
-            scrap.Talk(
+            parser.Talk(
                 title="Smoothing Speed Variability in Age-Friendly "
                 "Urban Traffic Management",
                 authors=[
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Jose Monreal Bailey",
                         "https://easychair.org/smart-program/ICCS2021/person1649.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Hadi Tabatabaee Malazi",
                         "https://easychair.org/smart-program/ICCS2021/person1650.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Siobhan Clarke",
                         "https://easychair.org/smart-program/ICCS2021/person1651.html",
                     ),
                 ],
             ),
-            scrap.Talk(
+            parser.Talk(
                 title="An innovative employment of NetLogo AIDS model in developing "
                 "a new chain coding mechanism for compression",
                 authors=[
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Khaldoon Dhou",
                         "https://easychair.org/smart-program/ICCS2021/person1439.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Christopher Cruzen",
                         "https://easychair.org/smart-program/ICCS2021/person1440.html",
                     ),
                 ],
             ),
-            scrap.Talk(
+            parser.Talk(
                 title="Simulation modeling of epidemic risk in supermarkets: "
                 "Investigating the impact of social distancing and "
                 "checkout zone design",
                 authors=[
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Tomasz Antczak",
                         "https://easychair.org/smart-program/ICCS2021/person1301.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Bartosz Skorupa",
                         "https://easychair.org/smart-program/ICCS2021/person1302.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Mikolaj Szurlej",
                         "https://easychair.org/smart-program/ICCS2021/person1303.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Rafal Weron",
                         "https://easychair.org/smart-program/ICCS2021/person1304.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Jacek Zabawa",
                         "https://easychair.org/smart-program/ICCS2021/person1305.html",
                     ),
                 ],
             ),
-            scrap.Talk(
+            parser.Talk(
                 title="A multi-cell cellular automata model of traffic flow "
                 "with emergency vehicles: effect of a corridor of life",
                 authors=[
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Krzysztof Małecki",
                         "https://easychair.org/smart-program/ICCS2021/person905.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Marek Kamiński",
                         "https://easychair.org/smart-program/ICCS2021/person906.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Jarosław Wąs",
                         "https://easychair.org/smart-program/ICCS2021/person907.html",
                     ),
                 ],
             ),
-            scrap.Talk(
+            parser.Talk(
                 title="HSLF: HTTP Header Sequence based LSH fingerprints "
                 "for Application Traffic Classification",
                 authors=[
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Zixian Tang",
                         "https://easychair.org/smart-program/ICCS2021/person910.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Qiang Wang",
                         "https://easychair.org/smart-program/ICCS2021/person911.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Wenhao Li",
                         "https://easychair.org/smart-program/ICCS2021/person807.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Huaifeng Bao",
                         "https://easychair.org/smart-program/ICCS2021/person808.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Wen Wang",
                         "https://easychair.org/smart-program/ICCS2021/person912.html",
                     ),
-                    scrap.AuthorOccurrence(
+                    parser.AuthorOccurrence(
                         "Feng Liu",
                         "https://easychair.org/smart-program/ICCS2021/person810.html",
                     ),
@@ -284,12 +284,12 @@ def test_parsing_session(session_tag):
 
 
 def test_parsing_session_coffee_break(coffee_break_tag):
-    result = scrap._parse_session(coffee_break_tag)
+    result = parser._parse_session(coffee_break_tag)
     assert result is None
 
 
 def test_parsing_program_page(program_doc):
-    result = scrap._parse_program_page(program_doc)
+    result = parser.parse_program_page(program_doc)
 
     assert len(result) == 85
 
