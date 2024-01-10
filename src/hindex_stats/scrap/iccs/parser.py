@@ -68,14 +68,11 @@ def _parse_session_label(label: str) -> tuple[str, int] | None:
 def _parse_session(tag: Tag) -> Session | None:
     label_tag = tag.find("span", {"class": "title"})
     label = label_tag.text.strip()
-    result = _parse_session_label(label)
-    if result:
-        name, number = result
-        talk_tags = tag.find_all("tr", {"class": "talk"})
-        talks = [_parse_talk(t) for t in talk_tags]
-        return Session(name, number, talks)
-    else:
-        return None
+    match _parse_session_label(label):
+        case (name, number):
+            talk_tags = tag.find_all("tr", {"class": "talk"})
+            talks = [_parse_talk(t) for t in talk_tags]
+            return Session(name, number, talks)
 
 
 def parse_program_page(doc: BeautifulSoup) -> list[Session]:
