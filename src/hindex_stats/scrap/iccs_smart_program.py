@@ -3,6 +3,8 @@ from dataclasses import dataclass
 
 from bs4 import BeautifulSoup, Tag
 
+from hindex_stats.utils import without_none
+
 
 @dataclass
 class AuthorOccurrence:
@@ -74,3 +76,8 @@ def _parse_session(tag: Tag) -> Session | None:
         return Session(name, number, talks)
     else:
         return None
+
+
+def _parse_program_page(doc: BeautifulSoup) -> list[Session]:
+    session_tags = doc.find_all("div", {"class": "session"})
+    return list(without_none(map(_parse_session, session_tags)))

@@ -104,6 +104,11 @@ def author_doc():
     return load_document("author.html")
 
 
+@pytest.fixture()
+def program_doc():
+    return load_document("program.html")
+
+
 def test_parsing_author_occurence(author_occurence_tag):
     result = scrap._parse_author_occurrence(author_occurence_tag)
 
@@ -281,3 +286,42 @@ def test_parsing_session(session_tag):
 def test_parsing_session_coffee_break(coffee_break_tag):
     result = scrap._parse_session(coffee_break_tag)
     assert result is None
+
+
+def test_parsing_program_page(program_doc):
+    result = scrap._parse_program_page(program_doc)
+
+    assert len(result) == 85
+
+    tracks = set(session.name for session in result)
+    expected = set(
+        [
+            "Keynote Lecture",
+            "MT",
+            "AIHPC4AS",
+            "BBC",
+            "COMS",
+            "SOFTMAC",
+            "CLDD",
+            "CSOC",
+            "DisA",
+            "CMSA",
+            "IoTSS",
+            "ACMAIML",
+            "SE4Science",
+            "MESHFREE",
+            "CompHealth",
+            "QCW",
+            "MMS",
+            "MLDADS",
+            "SmartSys",
+            "CGIPAI",
+            "SPU",
+            "CCI",
+            "DDCS",
+            "WTCS",
+            "UNEQUIvOCAL",
+        ]
+    )
+
+    assert tracks == expected
