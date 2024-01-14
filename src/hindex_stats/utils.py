@@ -12,6 +12,13 @@ def take(n: int, xs: Iterable) -> Iterable:
     return itertools.islice(xs, n)
 
 
+def without_none(xs: Iterable) -> Iterable:
+    """
+    Removes None values from the iterable.
+    """
+    return filter(lambda x: x is not None, xs)
+
+
 class SkipOnce:
     """
     A callable object that does nothing the first time it is called. Each
