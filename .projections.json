@@ -1,0 +1,16 @@
+{
+    "src/hindex_stats/*.py": {
+        "alternate": "tests/{dirname}/test_{basename}.py",
+        "type": "source"
+    },
+    "tests/**/test_*.py": {
+        "alternate": "src/hindex_stats/{}.py",
+        "type": "test"
+    },
+    "*": {
+        "path": [
+            "src/**",
+            "tests/**"
+        ]
+    }
+}
